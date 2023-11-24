@@ -44,8 +44,8 @@ const AuthProvider = ({ children }) => {
   };
 
   // user update profile
-
-  const updateUserProfile = (name, photo) => {
+  const userUpdateProfile = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
     creatUser,
     login,
     logOut,
-    updateUserProfile,
+    userUpdateProfile,
     gooleSignIn,
   };
 

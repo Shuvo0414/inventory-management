@@ -32,7 +32,8 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
-        toast.error("Passwords do not match");
+        // console.error("Login error:", error);
+        toast.error("Login failed.");
       });
   };
 
@@ -86,7 +87,10 @@ const Login = () => {
               </div>
             </form>
             <div className="mb-5">
-              <SocialLogin></SocialLogin>
+              <SocialLogin
+                subTitle={"Sign Up"}
+                title={"Don't have an account yet?"}
+              ></SocialLogin>
             </div>
           </div>
           <div className="hidden md:block w-full md:w-[700px]">

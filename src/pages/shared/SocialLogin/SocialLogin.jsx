@@ -3,13 +3,13 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
-const SocialLogin = () => {
-  const { googleLogin } = useAuth();
+const SocialLogin = ({ subTitle, title, linkTo }) => {
+  const { gooleSignIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    googleLogin()
+    gooleSignIn()
       .then(() => {
         toast.success("User login successfully");
         navigate(location?.state ? location.state : "/");
@@ -36,12 +36,12 @@ const SocialLogin = () => {
         <p>Continue with Google</p>
       </div>
       <p className="px-6 text-sm text-center text-gray-400">
-        Don&apos;t have an account yet?{" "}
+        {title}
         <Link
-          to="/signup"
-          className="hover:underline hover:text-[#00B499] text-gray-600"
+          to={linkTo || "/signup"}
+          className=" ml-2 hover:underline hover:text-[#00B499] text-gray-600"
         >
-          Sign up
+          {subTitle}
         </Link>
       </p>
     </>
