@@ -6,3 +6,5 @@ export default {
   },
   plugins: [require("daisyui")],
 };
+
+// #00B499
