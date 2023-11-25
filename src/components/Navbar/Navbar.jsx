@@ -22,18 +22,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to={"/aboutUs"}
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending "
-              : isActive
-              ? " text-[#00B499]  underline font-medium"
-              : ""
-          }
-        >
-          About Us
-        </NavLink>
+        <NavLink>About Us</NavLink>
       </li>
 
       <li>
