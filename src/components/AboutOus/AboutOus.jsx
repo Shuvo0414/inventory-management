@@ -2,7 +2,7 @@ import image from "../../assets/about.png";
 import Button from "../../pages/shared/Button/Button";
 const AboutOus = () => {
   return (
-    <div className=" max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-center mt-[60px] lg:gap-[144px] p-6">
+    <div className=" max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-[60px] lg:gap-[144px] p-6">
       <div>
         <img className=" w-[800px]" src={image} alt="" />
       </div>
