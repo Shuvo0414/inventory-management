@@ -55,7 +55,7 @@ const Register = () => {
         <div className="hidden md:block w-full md:w-[720px]">
           <img src={authImage} alt="Login" className="w-full" />
         </div>
-        <div className="card w-full max-w-md shadow-md bg-base-100">
+        <div className="card w-full py-4 max-w-md shadow-md bg-base-100">
           <form onSubmit={handleRegister} className="card-body">
             <div className="form-control">
               <label className="label">
@@ -86,10 +86,10 @@ const Register = () => {
                 <span className="label-text">Image Url</span>
               </label>
               <input
-                type="text"
+                type="file"
                 placeholder="image url"
                 name="photo"
-                className="input input-bordered focus:outline-none focus:border-[#00B499]"
+                className="input p-2 input-bordered focus:outline-none focus:border-[#00B499]"
               />
             </div>
             <div className="form-control relative">
@@ -119,13 +119,12 @@ const Register = () => {
                 Register
               </button>
             </div>
-
-            <SocialLogin
-              linkTo={"/login"}
-              title={"Have an account? Please"}
-              subTitle={"Log In"}
-            ></SocialLogin>
           </form>
+          <SocialLogin
+            linkTo={"/login"}
+            title={"Have an account? Please"}
+            subTitle={"Log In"}
+          ></SocialLogin>
         </div>
       </div>
     </div>
