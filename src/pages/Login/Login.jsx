@@ -7,11 +7,13 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { login } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+
   const [showPassword, setPassword] = useState(false);
 
   const handleLogIn = (e) => {
@@ -39,6 +41,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>StockPilot | Login </title>
+      </Helmet>
       <div className=" min-h-screen">
         <h1 className="text-2xl md:text-5xl font-bold text-center mt-10 md:mt-24">
           Please Login Your Account
