@@ -10,11 +10,15 @@ import ProductManagement from "../pages/Dashboard/ProductManagement/ProductManag
 import AddAProduct from "../components/Dashboard/AddAProduct/AddAProduct";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import UpdateProduct from "../components/Dashboard/UpdateProduct/UpdateProduct";
+import NotFound from "../pages/404error/NotFound";
+import ManegerRoute from "./ManegerRoute";
+import Forbidden from "../pages/Forbidden/Forbidden";
 
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: "/",
@@ -39,25 +43,47 @@ const Routes = createBrowserRouter([
     ],
   },
 
+  // dashboard route
+
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "product-management",
-        element: <ProductManagement></ProductManagement>,
+        element: (
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
+            <ProductManagement></ProductManagement>
+          </ManegerRoute>
+        ),
       },
       {
         path: "payment",
-        element: <Payment></Payment>,
+        element: (
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
+            <Payment></Payment>
+          </ManegerRoute>
+        ),
       },
       {
         path: "product-management/add-a-product",
-        element: <AddAProduct></AddAProduct>,
+        element: (
+          <ManegerRoute>
+            <AddAProduct></AddAProduct>
+          </ManegerRoute>
+        ),
       },
       {
         path: "updateProduct/:id",
-        element: <UpdateProduct></UpdateProduct>,
+        element: (
+          <ManegerRoute>
+            <UpdateProduct></UpdateProduct>
+          </ManegerRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5001/products/${params.id}`),
       },

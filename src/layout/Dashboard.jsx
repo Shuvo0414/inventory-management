@@ -7,6 +7,7 @@ import { MdHomeWork } from "react-icons/md";
 import MenuItem from "../components/Dashboard/Sidebar/MenuItem";
 import useAuth from "../hooks/useAuth";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/Footer/Footer";
 const Dashboard = () => {
   const { logOut } = useAuth();
   const [shop] = useShop();
@@ -14,7 +15,7 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content  flex flex-col items-start py-8 px-2 lg:px-28  border border-red-500  ">
+      <div className="drawer-content  flex flex-col justify-between items-start    ">
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
@@ -22,8 +23,12 @@ const Dashboard = () => {
         >
           <IoMdMenu />
         </label>
-        <div className=" ">
+
+        <div className="py-8 px-2 lg:px-28 ">
           <Outlet></Outlet>
+        </div>
+        <div className=" w-full">
+          <Footer></Footer>
         </div>
       </div>
 
