@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
-// Assuming your useShop hook looks like this
 const useShop = () => {
   const axios = useAxiosSecure();
   const { user } = useAuth();

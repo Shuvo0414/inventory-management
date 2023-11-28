@@ -1,6 +1,6 @@
 import { IoMdMenu } from "react-icons/io";
 import { GrLogout } from "react-icons/gr";
-import logo from "../../src/assets/ilogo.png";
+
 import useShop from "../hooks/useShop";
 import ManegerMenu from "../components/Dashboard/Sidebar/ManegerMenu";
 import { MdHomeWork } from "react-icons/md";
@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 const Dashboard = () => {
   const { logOut } = useAuth();
   const [shop] = useShop();
-  console.log(shop);
+  //   console.log(shop);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

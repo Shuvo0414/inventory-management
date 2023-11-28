@@ -1,34 +1,32 @@
 import axios from "axios";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
-import useShop from "../../../hooks/useShop";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddAProduct = () => {
-  const { register, handleSubmit } = useForm();
-  const [shop] = useShop();
-  const { user } = useAuth();
+const UpdateProduct = () => {
+  const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  //   console.log(shop);
+  const item = useLoaderData();
+  //   console.log(item);
 
-  // form submit
+  const {
+    productName,
+    productLocation,
+    productQuantity,
+    buyingPrice,
+    profitMargin,
+    discount,
+    _id,
+  } = item;
+
   const onSubmit = async (data) => {
     try {
-      // Convert numeric fields to numbers
-      const buyingPrice = parseInt(data.buyingPrice);
-      const profitMargin = parseInt(data.profitMargin);
-      // Calculate Selling Price
-      const sellingPrice =
-        buyingPrice +
-        buyingPrice * (7.5 / 100) +
-        buyingPrice * (profitMargin / 100);
-
       // image upload to imgbb and then get a URL
       const imageFile = { image: data.image[0] };
       const res = await axios.post(image_hosting_api, imageFile, {
@@ -38,35 +36,27 @@ const AddAProduct = () => {
       });
 
       if (res.data.success) {
-        //
-        const productObject = {
+        //update product
+        const updateProduct = {
           ...data,
           image: res.data.data.display_url,
-          shopId: shop[0]._id,
-          shopName: shop[0].shopName,
-          userEmail: user.email,
-          sellingPrice,
-          addedDate: new Date(),
-          saleCount: 0,
         };
-        // console.log(productObject);
+        const updateResponse = await axiosSecure.put(
+          `/products/${_id}`,
+          updateProduct
+        );
 
-        if (shop[0].productLimit > 0) {
-          const productRes = await axiosSecure.post("/products", productObject);
-          // console.log(productRes);
-          if (productRes.status === 201) {
-            const updatedShop = { productLimit: shop[0].productLimit - 1 };
-            await axiosSecure.patch(`/shop/${shop[0]._id}`, updatedShop);
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Product added successfuly",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        } else {
-          navigate("/dashboard/payment");
+        if (updateResponse.status === 200) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product update successfuly",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          navigate("/dashboard/product-management");
         }
       }
     } catch (error) {
@@ -75,7 +65,7 @@ const AddAProduct = () => {
   };
   return (
     <div className=" ">
-      <h1 className=" text-center text-4xl font-bold">Add Product</h1>
+      <h1 className=" text-center text-4xl font-bold">Update Product</h1>
       <div className=" mt-6 lg:w-[992px] mx-auto p-11 bg-[#F3F3F3] mb-[100px]">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex flex-col lg:flex-row gap-6">
@@ -88,6 +78,7 @@ const AddAProduct = () => {
               </label>
               <input
                 {...register("productName", { required: true })}
+                defaultValue={productName}
                 type="text"
                 placeholder="Name"
                 className="input input-bordered w-full "
@@ -101,7 +92,8 @@ const AddAProduct = () => {
                 </span>
               </label>
               <input
-                {...register("productLocation", { required: true })}
+                {...register("prodcutLocation", { required: true })}
+                defaultValue={productLocation}
                 type="text"
                 placeholder="Location"
                 className="input input-bordered w-full "
@@ -119,6 +111,7 @@ const AddAProduct = () => {
               </label>
               <input
                 {...register("productQuantity", { required: true })}
+                defaultValue={productQuantity}
                 type="number"
                 placeholder="Quantity"
                 className="input input-bordered w-full "
@@ -133,6 +126,7 @@ const AddAProduct = () => {
               </label>
               <input
                 {...register("buyingPrice", { required: true })}
+                defaultValue={buyingPrice}
                 type="number"
                 placeholder="Cost"
                 className="input input-bordered w-full "
@@ -150,6 +144,7 @@ const AddAProduct = () => {
               </label>
               <input
                 {...register("profitMargin", { required: true })}
+                defaultValue={profitMargin}
                 type="number"
                 placeholder="Margin"
                 className="input input-bordered w-full "
@@ -164,6 +159,7 @@ const AddAProduct = () => {
               </label>
               <input
                 {...register("discount", { required: true })}
+                defaultValue={discount}
                 type="number"
                 placeholder="Discount"
                 className="input input-bordered w-full "
@@ -196,7 +192,7 @@ const AddAProduct = () => {
             />
           </div>
           <button className="btn bg-[#00B499] text-white  font-bold rounded-none">
-            Add Product
+            Update
           </button>
         </form>
       </div>
@@ -204,4 +200,4 @@ const AddAProduct = () => {
   );
 };
 
-export default AddAProduct;
+export default UpdateProduct;
