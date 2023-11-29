@@ -13,6 +13,9 @@ import UpdateProduct from "../components/Dashboard/UpdateProduct/UpdateProduct";
 import NotFound from "../pages/404error/NotFound";
 import ManegerRoute from "./ManegerRoute";
 import Forbidden from "../pages/Forbidden/Forbidden";
+import SalesCollection from "../pages/Dashboard/SalesCollection/SalesCollection";
+import CheckOut from "../pages/Dashboard/CheckOut/CheckOut";
+import AdminRoute from "./AdminRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -66,6 +69,22 @@ const Routes = createBrowserRouter([
         element: (
           <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
             <Payment></Payment>
+          </ManegerRoute>
+        ),
+      },
+      {
+        path: "sales-collection",
+        element: (
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
+            <SalesCollection></SalesCollection>
+          </ManegerRoute>
+        ),
+      },
+      {
+        path: "check-out",
+        element: (
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
+            <CheckOut></CheckOut>
           </ManegerRoute>
         ),
       },

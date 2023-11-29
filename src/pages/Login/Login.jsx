@@ -8,11 +8,13 @@ import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import useManeger from "../../hooks/useManeger";
 
 const Login = () => {
   const { login } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isManeger, ,] = useManeger();
 
   const [showPassword, setPassword] = useState(false);
 
@@ -31,6 +33,9 @@ const Login = () => {
     login(email, password)
       .then(() => {
         toast.success("User login successfully");
+        if (isManeger) {
+          return navigate("/dashboard");
+        }
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {

@@ -1,9 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/ilogo.png";
 import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
+import useManeger from "../../hooks/useManeger";
+import WatchDemoVideo from "../../pages/WatchDemoVideo/WatchDemoVideo";
+import { useEffect, useState } from "react";
+
+import "./navbar.css";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isAdmin, ,] = useAdmin();
+  const [isManeger, ,] = useManeger();
 
   const links = (
     <>
@@ -25,40 +33,86 @@ const Navbar = () => {
         <NavLink>About Us</NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to={"/createStore"}
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending "
-              : isActive
-              ? " text-[#00B499]  underline font-medium"
-              : ""
-          }
-        >
-          Create-Store
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={"/watchDemo"}
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending "
-              : isActive
-              ? " text-[#00B499]  underline font-medium"
-              : ""
-          }
-        >
-          Watch Demo
-        </NavLink>
-      </li>
+      <WatchDemoVideo></WatchDemoVideo>
+
+      {!isManeger && (
+        <li>
+          <NavLink
+            to="/createStore"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending "
+                : isActive
+                ? "text-[#00B499] underline font-medium"
+                : ""
+            }
+          >
+            Create-Store
+          </NavLink>
+        </li>
+      )}
+
+      {isManeger && (
+        <li>
+          <NavLink
+            to={"/dashboard"}
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending "
+                : isActive
+                ? " text-[#00B499]  underline font-medium"
+                : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
+      {isAdmin && (
+        <li>
+          <NavLink
+            to={"/dashboard"}
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending "
+                : isActive
+                ? " text-[#00B499]  underline font-medium"
+                : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        // Adjust the scroll threshold as needed
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="navbar fixed z-10 top-0  bg-[#F5F7FA] bg-opacity-10 text-black py-5 px-3 lg:px-24 ">
+      <div
+        className={`navbar fixed z-10 top-0  bg-[#F5F7FA] bg-opacity-10 text-black py-5 px-3 lg:px-24 ${
+          scrolled ? "scrolled" : ""
+        }`}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className=" lg:hidden">

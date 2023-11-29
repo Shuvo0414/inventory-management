@@ -1,7 +1,12 @@
 import faqImg from "../../assets/faq.png";
 const FaqSection = () => {
   return (
-    <div className="bg-[#F3F5F6] mt-[60px]">
+    <div
+      data-aos="fade-up"
+      data-aos-easing="linear"
+      data-aos-duration="1500"
+      className="bg-[#F3F5F6] mt-[60px]"
+    >
       <div className=" flex flex-col lg:flex-row max-w-screen-xl mx-auto p-8 justify-center ">
         <div className=" lg:w-1/2">
           <img className=" w-[440px]" src={faqImg} alt="" />

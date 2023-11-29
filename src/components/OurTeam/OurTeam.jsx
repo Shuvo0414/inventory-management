@@ -5,7 +5,12 @@ import member4 from "../../assets/member4.png";
 
 const OurTeam = () => {
   return (
-    <div className=" max-w-screen-xl mx-auto  text-center mt-[60px]">
+    <div
+      data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="1500"
+      className=" max-w-screen-xl mx-auto  text-center mt-[60px]"
+    >
       <h1 className=" text-4xl font-bold text-[#00B499]">Our team</h1>
       <p className=" text-[#5A6980] text-base  p-4">
         Our team is a diverse group of individuals from various origins,

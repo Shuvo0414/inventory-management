@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import bgForbidden from "../../assets/error404.jpg";
+import bgForbidden from "../../assets/403.jpg";
 import Button from "../shared/Button/Button";
 
 const Forbidden = () => {

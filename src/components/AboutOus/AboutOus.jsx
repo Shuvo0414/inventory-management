@@ -3,11 +3,20 @@ import Button from "../../pages/shared/Button/Button";
 const AboutOus = () => {
   return (
     <div className=" max-w-screen-xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-[60px] lg:gap-[144px] p-6">
-      <div>
+      <div
+        data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500"
+      >
         <img className=" w-[410px]" src={image} alt="" />
       </div>
 
-      <div className=" lg:w-1/2">
+      <div
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="1500"
+        className=" lg:w-1/2"
+      >
         <h1 className=" mb-3 font-semibold text-[#00B499]">About Us</h1>
         <h2 className=" mb-3 text-[32px] font-medium">
           Guiding Businesses with Precision

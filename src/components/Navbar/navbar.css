@@ -1,0 +1,9 @@
+.scrolled {
+  background-color: #1b1b1b80; /* Set the background color when scrolled */
+  color: white; /* Set the text color to white */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.scrolled a {
+  color: white;
+}

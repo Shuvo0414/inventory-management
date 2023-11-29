@@ -13,7 +13,7 @@ const useManeger = () => {
       return res.data?.maneger;
     },
   });
-  console.log(isManeger);
+  // console.log(isManeger);
   return [isManeger, isManegerLoading];
 };
 

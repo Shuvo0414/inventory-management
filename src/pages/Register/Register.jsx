@@ -49,7 +49,7 @@ const Register = () => {
         role: "user",
       };
 
-      const res = await axiosClient.put(`/users/${user?.email}`, userInfo);
+      const res = await axiosClient.put(`/users/${email}`, userInfo);
       console.log(res.data);
 
       if (res.status === 200) {
