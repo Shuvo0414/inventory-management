@@ -63,11 +63,19 @@ const Routes = createBrowserRouter([
 
       {
         path: "manage-shop",
-        element: <ManageShop></ManageShop>,
+        element: (
+          <AdminRoute>
+            <ManageShop></ManageShop>
+          </AdminRoute>
+        ),
       },
       {
         path: "sale-summary",
-        element: <SaleSummary></SaleSummary>,
+        element: (
+          <AdminRoute>
+            <SaleSummary></SaleSummary>
+          </AdminRoute>
+        ),
       },
 
       // manager route
@@ -119,7 +127,9 @@ const Routes = createBrowserRouter([
           </ManegerRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5001/products/${params.id}`),
+          fetch(
+            `https://assignment-12-server-side-brown.vercel.app/products/${params.id}`
+          ),
       },
       {
         path: "sales-summary",

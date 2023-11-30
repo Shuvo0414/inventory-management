@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:5001",
+  baseURL: "https://assignment-12-server-side-brown.vercel.app",
 });
 const useAxiosClient = () => {
   return axiosClient;
