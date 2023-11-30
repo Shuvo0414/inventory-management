@@ -88,7 +88,6 @@ const AuthProvider = ({ children }) => {
           )
           .then(() => {
             // console.log("toke issue", res.data);
-            setLoading(false);
           });
       } else {
         axios
@@ -101,7 +100,6 @@ const AuthProvider = ({ children }) => {
           )
           .then(() => {
             // console.log(res.data);
-            setLoading(false);
           });
       }
     });
