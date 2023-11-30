@@ -16,6 +16,9 @@ import Forbidden from "../pages/Forbidden/Forbidden";
 import SalesCollection from "../pages/Dashboard/SalesCollection/SalesCollection";
 import CheckOut from "../pages/Dashboard/CheckOut/CheckOut";
 import AdminRoute from "./AdminRoute";
+import ManageShop from "../pages/Dashboard/ManageShop/ManageShop";
+import SaleSummary from "../pages/Dashboard/SaleSummary/SaleSummary";
+import SalesSummary from "../pages/SalesSummary/SalesSummary";
 
 const Routes = createBrowserRouter([
   {
@@ -56,6 +59,18 @@ const Routes = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // admin route
+
+      {
+        path: "manage-shop",
+        element: <ManageShop></ManageShop>,
+      },
+      {
+        path: "sale-summary",
+        element: <SaleSummary></SaleSummary>,
+      },
+
+      // manager route
       {
         path: "product-management",
         element: (
@@ -91,7 +106,7 @@ const Routes = createBrowserRouter([
       {
         path: "product-management/add-a-product",
         element: (
-          <ManegerRoute>
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
             <AddAProduct></AddAProduct>
           </ManegerRoute>
         ),
@@ -99,12 +114,20 @@ const Routes = createBrowserRouter([
       {
         path: "updateProduct/:id",
         element: (
-          <ManegerRoute>
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
             <UpdateProduct></UpdateProduct>
           </ManegerRoute>
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5001/products/${params.id}`),
+      },
+      {
+        path: "sales-summary",
+        element: (
+          <ManegerRoute forbiddenElement={<Forbidden></Forbidden>}>
+            <SalesSummary></SalesSummary>
+          </ManegerRoute>
+        ),
       },
     ],
   },

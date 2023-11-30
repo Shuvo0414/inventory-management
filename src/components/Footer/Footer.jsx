@@ -1,6 +1,7 @@
 import { FaFacebookF } from "react-icons/fa6";
 import { IoLogoInstagram } from "react-icons/io5";
 import { SlSocialTwitter } from "react-icons/sl";
+import logo from "../../assets/ilogo.png";
 const Footer = () => {
   return (
     <footer>
@@ -25,7 +26,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer bg-[#151515] footer-center p-4 text-white ">
+      <div className=" flex mx-auto justify-center footer bg-gray-300 footer-center p-4 text-black ">
+        <img src={logo} alt="" />
         <aside>
           <p>Copyright © 2023 - All right reserved by StockPilot Ltd</p>
         </aside>

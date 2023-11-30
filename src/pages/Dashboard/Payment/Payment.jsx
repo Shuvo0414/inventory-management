@@ -1,30 +1,20 @@
+import { loadStripe } from "@stripe/stripe-js";
+
+import { Elements } from "@stripe/react-stripe-js";
+
+import Payment10Dollars from "./Payment10Dollars";
+import Payment20Dollars from "./Payment20Dollars";
+import Payment50Dollars from "./Payment50Dollars";
+import Checkoutform from "./Checkoutform";
+
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
+
 const Payment = () => {
   return (
-    <div className=" gap-3 grid md:grid-cols-3">
-      {/* 1st card */}
-      <div className="card  w-[300px]  bg-neutral text-neutral-content">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title"> 10 dollars</h2>
-          <p>Lmit to 200</p>
-          <button className=" btn">Purchase Card</button>
-        </div>
-      </div>
-      {/* 2nd card */}
-      <div className="card w-[300px]  bg-neutral text-neutral-content">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title"> 20 dollars</h2>
-          <p>Lmit to 450</p>
-          <button className=" btn">Purchase Card</button>
-        </div>
-      </div>
-      {/* 3rd card */}
-      <div className="card  w-[300px]  bg-neutral text-neutral-content">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title"> 50 dollars</h2>
-          <p>Lmit to 1500</p>
-          <button className=" btn">Purchase Card</button>
-        </div>
-      </div>
+    <div>
+      <Elements stripe={stripePromise}>
+        <Checkoutform></Checkoutform>
+      </Elements>
     </div>
   );
 };
