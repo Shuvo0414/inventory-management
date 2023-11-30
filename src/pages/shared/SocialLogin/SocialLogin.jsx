@@ -2,17 +2,27 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosClient from "../../../hooks/useAxiosClient";
 
 const SocialLogin = ({ subTitle, title, linkTo }) => {
   const { gooleSignIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosClient = useAxiosClient();
 
   const handleLogin = () => {
     gooleSignIn()
-      .then(() => {
-        toast.success("User login successfully");
-        navigate(location?.state ? location.state : "/");
+      .then((result) => {
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "user",
+        };
+        axiosClient.put(`/users`, userInfo).then((res) => {
+          console.log(res.data);
+          toast.success("User login successfully");
+          navigate(location?.state ? location.state : "/");
+        });
       })
       .catch(() => {
         toast.error("Invailed User");

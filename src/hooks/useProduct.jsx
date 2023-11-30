@@ -4,9 +4,10 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useProduct = () => {
   const axios = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { refetch, data: product = [] } = useQuery({
     queryKey: ["product", user?.email],
+    enabled: !loading,
     queryFn: async () => {
       const res = await axios.get(`/products?email=${user?.email}`);
       return res.data;
