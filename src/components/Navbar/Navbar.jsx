@@ -37,23 +37,7 @@ const Navbar = () => {
 
       <WatchDemoVideo></WatchDemoVideo>
 
-      {isManeger && !isManeger && (
-        <li>
-          <NavLink
-            to="/createStore"
-            className={({ isActive, isPending }) =>
-              isPending
-                ? "pending "
-                : isActive
-                ? "text-[#00B499] underline font-medium"
-                : ""
-            }
-          >
-            Create-Store
-          </NavLink>
-        </li>
-      )}
-      {isAdmin && !isAdmin && (
+      {!isManeger && !isManeger && (
         <li>
           <NavLink
             to="/createStore"
