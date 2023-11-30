@@ -5,15 +5,16 @@ import useAuth from "../../../hooks/useAuth";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const Checkoutform = () => {
+  const [error, setError] = useState();
   const [clientSecret, setClientSecret] = useState("");
-
+  const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   useEffect(() => {
-    axiosSecure.post("/creat-payment-intent").then((res) => {
+    axiosSecure.post("").then((res) => {
       console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
@@ -36,9 +37,11 @@ const Checkoutform = () => {
     });
 
     if (error) {
-      console.log("[error]", error);
+      // console.log("[error]", error);
+      setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
+      setError("");
     }
 
     // confirm payment
@@ -59,6 +62,7 @@ const Checkoutform = () => {
       console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         console.log("transaction id", paymentIntent.id);
+        setTransactionId(paymentIntent.id);
 
         // now save the payment in the database
       }

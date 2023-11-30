@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import useAxiosClient from "../../../hooks/useAxiosClient";
 
 const SocialLogin = ({ subTitle, title, linkTo }) => {
-  const { gooleSignIn } = useAuth();
+  const { gooleSignIn, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosClient = useAxiosClient();
@@ -18,11 +18,15 @@ const SocialLogin = ({ subTitle, title, linkTo }) => {
           name: result.user?.displayName,
           role: "user",
         };
-        axiosClient.put(`/users`, userInfo).then((res) => {
-          console.log(res.data);
-          toast.success("User login successfully");
-          navigate(location?.state ? location.state : "/");
-        });
+
+        console.log(result.user.email);
+        axiosClient
+          .put(`/users/${result.user?.email}`, userInfo)
+          .then((res) => {
+            console.log(res.data);
+            toast.success("User login successfully");
+            navigate(location?.state ? location.state : "/");
+          });
       })
       .catch(() => {
         toast.error("Invailed User");

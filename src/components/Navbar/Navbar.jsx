@@ -13,6 +13,8 @@ const Navbar = () => {
   const [isAdmin, ,] = useAdmin();
   const [isManeger, ,] = useManeger();
 
+  console.log(isAdmin);
+
   const links = (
     <>
       <li>
@@ -35,7 +37,23 @@ const Navbar = () => {
 
       <WatchDemoVideo></WatchDemoVideo>
 
-      {!isManeger && (
+      {isManeger && !isManeger && (
+        <li>
+          <NavLink
+            to="/createStore"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending "
+                : isActive
+                ? "text-[#00B499] underline font-medium"
+                : ""
+            }
+          >
+            Create-Store
+          </NavLink>
+        </li>
+      )}
+      {isAdmin && !isAdmin && (
         <li>
           <NavLink
             to="/createStore"
@@ -155,7 +173,7 @@ const Navbar = () => {
                 className="btn btn-Secondary btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img src={user.photoURL} alt={user.displayName} />
+                  <img src={user?.photoURL} alt={user.displayName} />
                 </div>
               </label>
               <ul
